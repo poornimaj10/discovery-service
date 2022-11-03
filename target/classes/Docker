@@ -1,0 +1,8 @@
+FROM java:8
+
+VOLUME /tmp
+COPY discovery-service.jar discovery-service.jar
+EXPOSE 8080
+# set entropy source for faster (but less random) startup
+# see http://wiki.apache.org/tomcat/HowTo/FasterStartUp#Entropy_Source
+ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "discovery-service.jar"]
